@@ -25,7 +25,9 @@
     "ngx-agora": "1.5.14",
     "rxjs": "~6.3.3",
     "tslib": "^1.9.0",
-    "zone.js": "~0.8.26"
+    "zone.js": "~0.8.26",
+    "@angular/cli": "^10.1.6",
+    "@angular/compiler-cli": "^7.2.16"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.13.0",
