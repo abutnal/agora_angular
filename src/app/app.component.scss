@@ -1,0 +1,31 @@
+.local {
+    position: fixed;
+    right: 10rem;
+    top: 10rem;
+    width: 20vw;
+    height: 20vh;
+    border-radius: 3px;
+    overflow: hidden;
+    z-index: 1;
+  }
+  
+  .remote {
+    position: fixed;
+    top: 10rem;
+    left: 10rem;
+    width: 40vw;
+    height: 40vh;
+  }
+
+  .av-controll{
+    margin: 4px;
+    padding: 0.4rem;
+  }
+
+.cuto-control{
+  margin-left: 10rem;
+}
+  .cust-title{
+    margin-left: 10rem;
+    color:#eee;
+  }

@@ -1,0 +1,13 @@
+<div class="cust-title">
+    <h1>AROKEE.com</h1>
+</div>
+
+<div class="cuto-control">
+    <!-- <button class="av-controll" (click)="onCall(1000,1)">Call</button> -->
+    <button class="av-controll" (click)="handleExit($event)">End</button>
+    <button class="av-controll" (click)="handleMic($event)">Mute audio</button>
+    <button class="av-controll" (click)="handleCamera($event)">Mute video</button>
+</div>
+<div [id]="localCallId" class="local"></div>
+
+<div *ngFor="let callId of remoteCalls" [id]="callId" class="remote"></div>
