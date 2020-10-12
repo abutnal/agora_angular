@@ -45,7 +45,6 @@ export class AppComponent implements OnInit {
       })
     }
     finally {
-      // this.setState({ readyState: false })
       this.client = null
       this.localStream = null
       // redirect to index
