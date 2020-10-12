@@ -9,6 +9,8 @@ import { AgoraClient, ClientEvent, NgxAgoraService, Stream, StreamEvent } from '
 export class AppComponent implements OnInit {
   title = 'angular-video';
   localCallId = 'agora_local';
+  audio_status = 'Mute Audio';
+  video_status = 'Mute Video';
   remoteCalls: string[] = [];
 
   private client: AgoraClient;
@@ -19,13 +21,36 @@ export class AppComponent implements OnInit {
     this.uid = Math.floor(Math.random() * 100);
   }
 
-  handleCamera = (e) => {
+  setSaving(element, text) {
+    console.log("tettd", text)
+    if (text === 'Mute Audio') {
+      this.audio_status = 'Unmute Audio';
+    } else if (text === 'Unmute Audio') {
+      this.audio_status = 'Mute Audio';
+    }
+  }
+
+  handleCamera = (e, text) => {
+
+    if (text === 'Mute Video') {
+      this.video_status = 'Unmute Video';
+    } else if (text === 'Unmute Video') {
+      this.video_status = 'Mute Video';
+    }
+
     e.currentTarget.classList.toggle('off')
     this.localStream.isVideoOn() ?
       this.localStream.disableVideo() : this.localStream.enableVideo()
   }
 
-  handleMic = (e) => {
+  handleMic = (e, text) => {
+
+    if (text === 'Mute Audio') {
+      this.audio_status = 'Unmute Audio';
+    } else if (text === 'Unmute Audio') {
+      this.audio_status = 'Mute Audio';
+    }
+
     e.currentTarget.classList.toggle('off')
     this.localStream.isAudioOn() ?
       this.localStream.disableAudio() : this.localStream.enableAudio()
@@ -59,39 +84,8 @@ export class AppComponent implements OnInit {
     this.assignLocalStreamHandlers();
     // Join and publish methods added in this step
     this.initLocalStream(() => this.join(uid => this.publish(), error => console.error(error)));
-    
+
   }
-  // onCall(data, btn) {
-  //   if(btn==1){
-  //     console.log("btnnn",btn)
-  //     this.initLocalStream(() => this.join(uid => this.publish(), error => console.error(error)));
-  //   }else if(btn==0){
-  //     this.initLocalStream(() => this.join(() => this.publish(), error => console.error(error)));
-  //   }
-  // }
-  
-
-  // onCall(data, btn) {
-  //   let roomID = ''
-  //   let audio_status = true;
-  //   let video_status = true;
-  //   if(btn==1){
-  //     roomID = data;
-  //   }
-  //   if(btn==0){
-  //     roomID = '';
-  //   }
-    
-  //   this.client = this.ngxAgoraService.createClient({ mode: 'rtc', codec: 'h264' });
-  //   this.assignClientHandlers();
-
-  //   this.localStream = this.ngxAgoraService.createStream({ streamID: roomID, audio: audio_status, video: video_status, screen: false });
-  //   this.assignLocalStreamHandlers();
-  //   // Join and publish methods added in this step
-  //   this.initLocalStream(() => this.join(uid => this.publish(), error => console.error(error)));
-  //   // alert('I am ready')
-  // }
-
 
 
   /**
@@ -155,7 +149,7 @@ export class AppComponent implements OnInit {
       if (stream) {
         stream.stop();
         this.remoteCalls = this.remoteCalls.filter(call => call !== `${this.getRemoteId(stream)}`);
-        console.log(`Arjun_ ${evt.uid} left from this channel`);
+        console.log(`${evt.uid} left from this channel`);
       }
     });
   }
@@ -187,7 +181,4 @@ export class AppComponent implements OnInit {
   private getRemoteId(stream: Stream): string {
     return `agora_remote-${stream.getId()}`;
   }
-
-  
-
 }
