@@ -1,14 +1,30 @@
 <div class="cust-title">
     <h1>AROKEE.com</h1>
 </div>
-
-<div class="cuto-control">
-    <!-- <button class="av-controll" (click)="onCall(1000,1)">Call</button> -->
-    <button class="av-controll" (click)="handleExit($event)">End</button>
-    <button class="av-controll" (click)="handleMic($event, audio_status)">{{audio_status}}</button>
-    <button class="av-controll" (click)="handleCamera($event, video_status)">{{video_status}}</button>
+<div class="row">
+    <div class="col-md-12">
+        <div class="cuto-control">
+            <!-- {{callBtn}} -->
+            
+             <span>
+                <div *ngIf="callBtn">
+                    <button class="av-controll" (click)="handleCall($event, '5000')">Call</button>                    
+                </div>
+                <div *ngIf="vc_window">
+                <button class="av-controll" (click)="handleExit($event)">End</button>
+                <button class="av-controll" (click)="handleMic($event, audio_status)">{{audio_status}}</button>
+                <button class="av-controll" (click)="handleCamera($event, video_status)">{{video_status}}</button>
+                </div>
+             </span>
+           
+        </div>
+        
+    </div>
+</div>
+<div class="row" *ngIf="vc_window">
+    <div class="col-md-12 mt-5">
+        <div [id]="localCallId" class="local"></div>
+        <div *ngFor="let callId of remoteCalls" [id]="callId" class="remote"></div>
+    </div>
 </div>
 
-<div [id]="localCallId" class="local"></div>
-
-<div *ngFor="let callId of remoteCalls" [id]="callId" class="remote"></div>
